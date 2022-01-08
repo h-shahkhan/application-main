@@ -1,0 +1,28 @@
+---
+# pipeline work that connects all of this
+
+pipeline:
+  - sinf:
+    # Serial Inference Subpipeline
+    spellcheck:
+      input: text
+      # Spell Checker Bert
+      size: small
+      version: 1
+      ignore: [xyz, lmno, pqrst]
+  - pinf:
+    # Parallel Inference Subpipeline
+      classification:
+        model: bert
+        size: large
+        language: en
+        labels: [hello, bye, thanks]
+      entity:
+        model: crf
+      datetime:
+  - sinf:
+    # Serial Inference Subpipeline
+    spellcheck:
+      size: small
+      version: 1
+      ignore: [xyz, lmno, pqrst]
